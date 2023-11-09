@@ -1,0 +1,91 @@
+<%- include('../partials/header'); -%>
+
+    <body class="red lighten-5">
+        <div class="container">
+            <div class="registerCard">
+                <div class="row">
+                    <div class="col s12 m12">
+                        <div class="card z-depth-5 red lighten-5">
+                            <div class="card-content black-text">
+                                <span class="card-title center">
+                                    <h4>Create New Account</h4>
+                                </span>
+                                <div class="row">
+                                    <form class="col s12" id="createNewUserForm">
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                <input name="firstName" id="firstName" type="text" class="validate" data-length="10" required>
+                                                <label for="firstName">First Name</label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                <input name="lastName" id="lastName" type="text" class="validate" required>
+                                                <label for="lastName">Last Name</label>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                <input name="email" id="email" type="email" class="validate" required>
+                                                <label for="email">Email</label>
+                                                <div class="email-error"></div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="input-field col s12">
+                                                <input name="password" id="password" type="password" class="validate" required>
+                                                <label for="password">Password</label>
+                                                <div class="password-error"></div>
+                                            </div>
+                                        </div>
+                                        
+                                        <button class="waves-effect waves-light btn red center">Submit</button>
+                                    
+                                    <p class="right-align">Already A User, <a href="/login">Log In</a> here </p>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+        const form = document.querySelector('#createNewUserForm');
+        let emailError = document.querySelector('.email-error');
+        let passwordError = document.querySelector('.password-error');
+
+        // reset errors
+        
+
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+            emailError.textContent = '';
+            passwordError.textContent = '';
+            const firstName = form.firstName.value;
+            const lastName = form.lastName.value;
+            const email = form.email.value;
+            const password = form.password.value;
+            try {
+                 const res = await fetch('/register', { 
+                    method: 'POST',
+                    body: JSON.stringify({firstName, lastName, email, password}),
+                    headers: {'Content-Type': 'application/json'}
+                  });
+                  const data = await res.json();
+                  if (data.errors) {
+                    emailError.textContent = data.errors.email;
+                    passwordError.textContent = data.errors.password;
+                  }
+                  if (data.user) {
+                    location.assign('/login');
+                  }
+            } catch (error) {
+                console.log(error);
+            }
+        })
+
+    </script>
+    </body>
