@@ -410,7 +410,8 @@ app.post('/api/sendmessage', async (req, res) => {
 }); 
 
 
-
+// WINDOWS COMPATIBLE
+/* 
 function manageUploadedFile(action, file) {
   return new Promise((resolve, reject) => {
     try {
@@ -445,7 +446,48 @@ function manageUploadedFile(action, file) {
       reject(error); // Reject the promise on any other unexpected error
     }
   });
+} */
+
+
+
+
+function manageUploadedFile(action, file) {
+  return new Promise((resolve, reject) => {
+    try {
+      if (action === 'create') {
+        const tmpDir = '/tmp'; // Use /tmp instead of relative path
+        const filePath = path.join(tmpDir, file.name);
+        
+        fs.createReadStream(file.path).pipe(fs.createWriteStream(filePath))
+          .on('finish', () => resolve(filePath))
+          .on('error', reject);
+        
+      } else if (action === 'delete') {
+        const tmpDir = '/tmp';
+        const filePath = path.join(tmpDir, file.name);
+        
+        fs.unlink(filePath, (err) => {
+          if (err) reject(err);
+          else resolve(true);
+        });
+        
+      } else {
+        const errorMessage = 'Invalid action';
+        reject(new Error(errorMessage));
+      }
+    } catch (error) {
+      reject(error);
+    }
+  });
 }
+
+
+
+
+
+
+
+
 
 
 async function downloadFileFromUrl(fileUrl, action) {
