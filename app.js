@@ -263,7 +263,9 @@ app.post('/api/sendmessage', async (req, res) => {
                     }
                   
                     const filePath = await manageUploadedFile('create', file);
+                    console.log('filepath is ' + filePath);
                     const media = MessageMedia.fromFilePath(filePath);
+                    console.log('media is ' + media);
                     const client = session.client;
                     await client.sendMessage(mobNoAsUID, media, { caption: message }).then(async (response) => {
                       user.AvailableCredits--;
@@ -456,6 +458,8 @@ function manageUploadedFile(action, file) {
     try {
       if (action === 'create') {
         const tmpDir = '/tmp'; // Use /tmp instead of relative path
+        console.log(tmpDir);
+        console.log(file.name);
         const filePath = path.join(tmpDir, file.name);
         
         fs.createReadStream(file.path).pipe(fs.createWriteStream(filePath))
@@ -473,10 +477,12 @@ function manageUploadedFile(action, file) {
         
       } else {
         const errorMessage = 'Invalid action';
-        reject(new Error(errorMessage));
+        reject(new Error(errorMessage)
+        );
       }
     } catch (error) {
       reject(error);
+      console.log(error);
     }
   });
 }
