@@ -452,12 +452,11 @@ function manageUploadedFile(action, file) {
 
 
 
-
 function manageUploadedFile(action, file) {
   return new Promise((resolve, reject) => {
     try {
       if (action === 'create') {
-        const tmpDir = '/tmp'; // Use /tmp instead of relative path
+        const tmpDir = '/tmp';
         console.log(tmpDir);
         console.log(file.name);
         const filePath = path.join(tmpDir, file.name);
@@ -477,8 +476,7 @@ function manageUploadedFile(action, file) {
         
       } else {
         const errorMessage = 'Invalid action';
-        reject(new Error(errorMessage)
-        );
+        reject(new Error(errorMessage));
       }
     } catch (error) {
       reject(error);
@@ -493,8 +491,9 @@ function manageUploadedFile(action, file) {
 
 
 
+// NOT REQUIRED FUNCTION
 
-
+/* 
 
 async function downloadFileFromUrl(fileUrl, action) {
   try {
@@ -535,7 +534,7 @@ async function downloadFileFromUrl(fileUrl, action) {
     throw error;
   }
 }
-
+ */
 
 function formattedwaNo(mobileNo) {
   try {
