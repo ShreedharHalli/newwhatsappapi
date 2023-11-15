@@ -413,7 +413,7 @@ app.post('/api/sendmessage', async (req, res) => {
 
 
 // WINDOWS COMPATIBLE
-/* 
+
 function manageUploadedFile(action, file) {
   return new Promise((resolve, reject) => {
     try {
@@ -448,10 +448,10 @@ function manageUploadedFile(action, file) {
       reject(error); // Reject the promise on any other unexpected error
     }
   });
-} */
+}
 
 
-
+/* 
 function manageUploadedFile(action, file) {
   return new Promise((resolve, reject) => {
     try {
@@ -484,7 +484,7 @@ function manageUploadedFile(action, file) {
     }
   });
 }
-
+ */
 
 
 
