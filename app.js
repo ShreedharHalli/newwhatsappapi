@@ -74,7 +74,7 @@ app.get('/generateqrcode', (req, res) => {
     const client = new Client({
       restartOnAuthFail: true,
       puppeteer: {
-        // executablePath: '/usr/bin/google-chrome-stable',
+         executablePath: '/usr/bin/google-chrome-stable',
         headless: true,
         args: [
           '--no-sandbox',
@@ -294,7 +294,7 @@ app.post('/api/sendmessage', async (req, res) => {
                   const client = new Client({
                     restartOnAuthFail: true,
                     puppeteer: {
-                      // executablePath: '/usr/bin/google-chrome-stable',
+                       executablePath: '/usr/bin/google-chrome-stable',
                       headless: true,
                       args: [
                         '--no-sandbox',
@@ -564,7 +564,7 @@ app.post('/deleteWhClientSession', async (req, res) => {
     const client = new Client({
       restartOnAuthFail: true,
       puppeteer: {
-        // executablePath: '/usr/bin/google-chrome-stable',
+         executablePath: '/usr/bin/google-chrome-stable',
         headless: true,
         args: [
           '--no-sandbox',
@@ -837,7 +837,7 @@ async function getWhatsappSession(token) {
     return new Promise((resolve, reject) => {
       const client = new Client({
         qrMaxRetries: 1, // to stop qr code to run infinitely.
-        // executablePath: '/usr/bin/google-chrome-stable',
+         executablePath: '/usr/bin/google-chrome-stable',
         restartOnAuthFail: true,
         puppeteer: {
           headless: true,
@@ -996,7 +996,7 @@ setupMessageListenersForAllClients();
         const client = new Client({
           restartOnAuthFail: true,
           puppeteer: {
-            // executablePath: '/usr/bin/google-chrome-stable',
+             executablePath: '/usr/bin/google-chrome-stable',
             headless: true,
             args: [
               '--no-sandbox',
@@ -1057,7 +1057,7 @@ setupMessageListenersForAllClients();
         const client = new Client({
           restartOnAuthFail: true,
           puppeteer: {
-            //////// executablePath: '/usr/bin/google-chrome-stable',
+            ////// executablePath: '/usr/bin/google-chrome-stable',
             headless: true,
             args: [
               '--no-sandbox',
