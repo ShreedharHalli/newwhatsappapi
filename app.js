@@ -313,6 +313,10 @@ app.post('/api/sendmessage', async (req, res) => {
                       clientId: token,
                     }),
                   });
+
+                  const state = await client.getState();
+                    console.log('client state is ' + state);
+
                   client.on('qr', () => {
                     console.log('asking qr code');
                     res.status(500).json({
