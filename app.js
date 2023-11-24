@@ -225,12 +225,14 @@ app.post('/api/sendmessage', async (req, res) => {
           if (user.AvailableCredits > 1) {
             for (const device of user.connectedWhatsAppDevices) {
               if (device.connectedWano === whatsappClientId) {
-                token = device.token;
+                let token = device.token;
                 console.log(token);
                 const session = sessionMap.get(token);
                 if (session) {
                   if (messageType === 'text') { // SEND ONLY TEXT MESSAGES
                     const client = session.client;
+                    const state = await client.getState();
+                    console.log('client state is ' + state);
                   await client.sendMessage(mobNoAsUID, message).then(async (response) => {
                     user.AvailableCredits--;
                     await User.updateOne({ _id: user._id }, { $set: { AvailableCredits: user.AvailableCredits } });
