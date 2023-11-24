@@ -112,7 +112,7 @@ app.get('/generateqrcode', (req, res) => {
       });
       const loggedinCustomerObj = res.locals.user;
       insertClientSessionDetailsToCustomerDocument(loggedinCustomerObj, token, connectedWhatsappNo)
-      setupMessageListenersForAllClients();
+      // setupMessageListenersForAllClients();
     })
 
   
@@ -381,7 +381,7 @@ app.post('/api/sendmessage', async (req, res) => {
                         });
                       });
                     }
-                    setupMessageListenersForAllClients();
+                    // setupMessageListenersForAllClients();
                   })
                   client.initialize();
                 }
@@ -920,7 +920,7 @@ function sleep(ms) {
 
 
 
-async function setupMessageListener(client) {
+/* async function setupMessageListener(client) {
   client.on('message', async (message) => {
     try {
       const { body, from, fromMe, id, to } = message;
@@ -954,13 +954,13 @@ async function setupMessageListener(client) {
       return null;
     }
   });
-}
+} */
 
 
 
 
 
-// Function to set up event listeners for all clients in the sessionMap
+/* // Function to set up event listeners for all clients in the sessionMap
 function setupMessageListenersForAllClients() {
   for (const session of sessionMap.values()) {
     console.log(session);
@@ -971,7 +971,7 @@ function setupMessageListenersForAllClients() {
 // Call this function to set up event listeners for all clients
 setupMessageListenersForAllClients();
 
-
+ */
 
 //===================================================================================================================== 
 
