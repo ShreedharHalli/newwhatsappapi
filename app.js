@@ -296,6 +296,7 @@ app.post('/api/sendmessage', async (req, res) => {
                   const client = new Client({
                     restartOnAuthFail: true,
                     puppeteer: {
+                      qrMaxRetries: 1,
                        executablePath: '/usr/bin/google-chrome-stable',
                       headless: true,
                       args: [
@@ -313,10 +314,6 @@ app.post('/api/sendmessage', async (req, res) => {
                       clientId: token,
                     }),
                   });
-
-                  const state = await client.getState();
-                    console.log('client state is ' + state);
-
                   client.on('qr', () => {
                     console.log('asking qr code');
                     res.status(500).json({
@@ -324,7 +321,6 @@ app.post('/api/sendmessage', async (req, res) => {
                     })
                   });
                   client.on('ready', async () => {
-                    console.log('sendmessage side ready event fired');
                     let connectedWhatsappNo = client.info.wid.user;
                     sessionMap.set(token, {
                       id: token,
@@ -390,6 +386,8 @@ app.post('/api/sendmessage', async (req, res) => {
                     // setupMessageListenersForAllClients();
                   })
                   client.initialize();
+                  const state = await client.getState();
+                    console.log('client state is ' + state);
                 }
                 break;
               }
