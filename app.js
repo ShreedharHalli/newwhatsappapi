@@ -546,10 +546,8 @@ function formattedwaNo(mobileNo) {
       return
     } else {
       let stringed = mobileNo.toString();
-  if (stringed.length === 10) {
-    let mobNoAsUID = `91${stringed}@c.us`;
+    let mobNoAsUID = `${stringed}@c.us`;
     return mobNoAsUID
-  }
     }
   } catch (error) {
   console.log(error); 
