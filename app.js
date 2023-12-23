@@ -121,7 +121,6 @@ app.get('/generateqrcode', (req, res) => {
     })
     client.on('disconnected', (reason) => {
       console.log('Client was logged out', reason);
-      client.destroy();
     });
   client.initialize();
   } catch (err) {
@@ -585,7 +584,6 @@ app.post('/deleteWhClientSession', async (req, res) => {
     });
     client.initialize();
     await client.logout(); // Logout from WhatsApp service
-    client.pupBrowser.close(); // NEWLY ADDED, DELETE IF ERROR OCCURS
     console.log('Object removed successfully');
   } catch (error) {
     console.error(error);
